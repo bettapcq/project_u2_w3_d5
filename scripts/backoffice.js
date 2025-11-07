@@ -123,6 +123,6 @@ form.addEventListener('submit', (e) => {
     })
     .catch((err) => {
       errorModal.show();
-      errorModalText.textContent = 'La tua pianta non è stata aggiunta:' + err;
+      errorModalText.innerText = 'La tua pianta non è stata aggiunta:' + err;
     });
 });

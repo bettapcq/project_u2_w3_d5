@@ -8,9 +8,8 @@ setYearFooter();
 
 const productsURL = 'https://striveschool-api.herokuapp.com/api/product';
 
-const errorModal = document.getElementById("errorModal")
-const errorModalText = document.getElementById('errorModalText')
-
+const errorModal = document.getElementById('errorModal');
+const errorModalText = document.getElementById('errorModalText');
 
 const getProducts = function () {
   //mostro lo spinner
@@ -55,8 +54,8 @@ const getProducts = function () {
       spinner.classList.add('d-none');
     })
     .catch((err) => {
-    errorModal.show();
-    errorModalText.textContent = "Ops, c'è un problema con il server: " + err;
+      errorModal.show();
+      errorModalText.innerText = "Ops, c'è un problema con il server: " + err;
     });
 };
 

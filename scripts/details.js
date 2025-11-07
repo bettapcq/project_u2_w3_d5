@@ -124,6 +124,6 @@ const deletePlant = () => {
     })
     .catch((err) => {
       errorModal.show();
-      errorModalText.textContent = 'Ops! Errore dal server:' + err;
+      errorModalText.innerText = 'Ops! Errore dal server:' + err;
     });
 };
