@@ -8,7 +8,14 @@ setYearFooter();
 
 const productsURL = 'https://striveschool-api.herokuapp.com/api/product';
 
+const errorModal = document.getElementById("errorModal")
+const errorModalText = document.getElementById('errorModalText')
+
+
 const getProducts = function () {
+  //mostro lo spinner
+  const spinner = document.getElementById('spinner');
+  spinner.classList.remove('d-none');
   fetch(productsURL, {
     headers: {
       Authorization:
@@ -44,9 +51,12 @@ const getProducts = function () {
             </div>
         `;
       });
+      // tolgo lo spinner
+      spinner.classList.add('d-none');
     })
     .catch((err) => {
-      alert("Ops, c'è un problema con il server:" + err);
+    errorModal.show();
+    errorModalText.textContent = "Ops, c'è un problema con il server: " + err;
     });
 };
 

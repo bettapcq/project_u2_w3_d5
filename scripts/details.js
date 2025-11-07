@@ -6,6 +6,9 @@ const setYearFooter = function () {
 
 setYearFooter();
 
+const errorModal = document.getElementById('errorModal');
+const errorModalText = document.getElementById('errorModalText');
+
 // SEZZIONE PER IDENTIFICARE ID DELLA PIANTA
 const allTheParameters = new URLSearchParams(location.search); // new URLSearchParams(url);
 const id = allTheParameters.get('_id');
@@ -120,6 +123,7 @@ const deletePlant = () => {
       }
     })
     .catch((err) => {
-      console.log('Ops! Errore dal server:', err);
+      errorModal.show();
+      errorModalText.textContent = 'Ops! Errore dal server:' + err;
     });
 };

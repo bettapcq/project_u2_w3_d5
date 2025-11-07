@@ -9,19 +9,19 @@ setYearFooter();
 //API URL
 const productsURL = 'https://striveschool-api.herokuapp.com/api/product';
 
+const errorModal = document.getElementById('errorModal');
+const errorModalText = document.getElementById('errorModalText');
+
 //SEZIONE PER IDENTIFICARE ID PIANTA
 const allTheParameters = new URLSearchParams(location.search); // new URLSearchParams(url);
 const id = allTheParameters.get('_id');
 console.log('ID pianta', id);
 
-
-
-  const titleText = document.getElementById('title-text');
-  const formBtn = document.getElementById('form-btn');
+const titleText = document.getElementById('title-text');
+const formBtn = document.getElementById('form-btn');
 
 //SE L'ID E' PRESENTE NELL'url, TRAMITE GET RIEMPIO IL FORM CON I DETTAGLI DELLA PIANTA
 if (id) {
-
   titleText.innerText = 'Modifica la tua pianta';
   formBtn.innerText = 'Aggiungi modifica';
 
@@ -42,7 +42,8 @@ if (id) {
     //compilo il form
     .then((plantDetails) => {
       document.getElementById('name-input').value = plantDetails.name;
-      document.getElementById('description-input').value = plantDetails.description;
+      document.getElementById('description-input').value =
+        plantDetails.description;
       document.getElementById('brand-input').value = plantDetails.brand;
       document.getElementById('image-url-input').value = plantDetails.imageUrl;
       document.getElementById('price-input').value = plantDetails.price;
@@ -83,7 +84,6 @@ form.addEventListener('submit', (e) => {
 
   //SE L'ID E' PRESENTE NEL SERVER UTILIZZO PUT (MODIFICA) SE NO UTILIZZO POST(AGGIUNGI) E CAMBIO I BOTTONI
 
-
   let apiMethod;
   let fullUrl;
 
@@ -106,14 +106,14 @@ form.addEventListener('submit', (e) => {
   })
     .then((res) => {
       if (res.ok) {
-        if(apiMethod === 'POST') {
-        alert('Bentvenuta in famiglia!');
-        form.reset();
-        location.assign('./index.html');
+        if (apiMethod === 'POST') {
+          alert('Bentvenuta in famiglia!');
+          form.reset();
+          location.assign('./index.html');
         } else {
           alert('Pianta modificata!');
-        form.reset();
-        location.assign('./index.html');
+          form.reset();
+          location.assign('./index.html');
         }
       } else {
         throw new Error(
@@ -122,6 +122,7 @@ form.addEventListener('submit', (e) => {
       }
     })
     .catch((err) => {
-      console.log('La tua pianta non è stata aggiunta:', err);
+      errorModal.show();
+      errorModalText.textContent = 'La tua pianta non è stata aggiunta:' + err;
     });
 });
