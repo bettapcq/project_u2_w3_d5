@@ -32,14 +32,14 @@ const getProducts = function () {
         productsRow.innerHTML += `
             <div class="col">
                 <div class="card h-100 d-flex flex-column bg-dark">
-                    <img src="${plant.imageUrl}" class="card-img-top" alt="...">
+                    <img src="${plant.imageUrl}" class="card-img-top" alt="plant">
                     <div class="card-body flex-grow-1">
                         <h5 class="card-title">${plant.name}</h5>
                         <p class="card-text">${plant.description}</p>
                         <p class="card-text">${plant.brand}</p>
                         <p class="card-text">${plant.price} €</p>
                     </div>
-               <a href="./details.html?_id=${plant._id}" target="_blank" class="btn btn-success">Vai ai dettagli</a>
+               <a href="./details.html?_id=${plant._id}" target="_blank" class="btn btn-success m-2">Vai ai dettagli</a>
                 </div>
             </div>
         `;

@@ -31,8 +31,8 @@ const getPlantDetails = () => {
     .then((plantDetails) => {
       console.log(plantDetails);
       detailsRow.innerHTML += `
-            <div class="col col-12 col-md-8 col-lg-6">
-                <div class="card h-100 d-flex flex-column bg-dark">
+            <div class="col col-12 col-md-6 col-lg-4">
+                <div class="card h-100 d-flex flex-column bg-dark shadow-lg">
                     <img src="${plantDetails.imageUrl}" class="card-img-top" alt="...">
                     <div class="card-body flex-grow-1">
                         <h5 class="card-title">${plantDetails.name}</h5>
@@ -40,9 +40,50 @@ const getPlantDetails = () => {
                         <p class="card-text">${plantDetails.brand}</p>
                         <p class="card-text">${plantDetails.price} €</p>
                     </div>
-                    <div>
+                    <div class="p-3">
                <button type="button" onclick="editPlant()" class="btn btn-warning">Modifica</button>
-               <button type="button" onclick="deletePlant()" class="btn btn-danger">Elimina</button>
+               <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+              data-bs-target="#deleteModal">Elimina</button>
+               <div
+              class="modal fade"
+              id="deleteModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      Sicuro di voler eliminare la pianta?
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Annulla
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      data-bs-dismiss="modal"
+                      onclick="deletePlant()"
+                    >
+                      Elimina
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
                 </div>
                 </div>
             </div>

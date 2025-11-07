@@ -14,8 +14,17 @@ const allTheParameters = new URLSearchParams(location.search); // new URLSearchP
 const id = allTheParameters.get('_id');
 console.log('ID pianta', id);
 
-//SE L'ID E' PRESENTE NEL SERVER TRAMITE GET RIEMPIO IL FORM CON I DETTAGLI DELLA PIANTA
+
+
+  const titleText = document.getElementById('title-text');
+  const formBtn = document.getElementById('form-btn');
+
+//SE L'ID E' PRESENTE NELL'url, TRAMITE GET RIEMPIO IL FORM CON I DETTAGLI DELLA PIANTA
 if (id) {
+
+  titleText.innerText = 'Modifica la tua pianta';
+  formBtn.innerText = 'Aggiungi modifica';
+
   fetch(productsURL + '/' + id, {
     headers: {
       Authorization:
@@ -30,12 +39,13 @@ if (id) {
         throw new Error(res.status);
       }
     })
+    //compilo il form
     .then((plantDetails) => {
-      document.getElementById('name').value = plantDetails.name;
-      document.getElementById('description').value = plantDetails.description;
-      document.getElementById('brand').value = plantDetails.brand;
-      document.getElementById('imageUrl').value = plantDetails.imageUrl;
-      document.getElementById('price').value = plantDetails.price;
+      document.getElementById('name-input').value = plantDetails.name;
+      document.getElementById('description-input').value = plantDetails.description;
+      document.getElementById('brand-input').value = plantDetails.brand;
+      document.getElementById('image-url-input').value = plantDetails.imageUrl;
+      document.getElementById('price-input').value = plantDetails.price;
     })
     .catch((err) => {
       console.log('form non completato correttamente:', err);
@@ -73,8 +83,6 @@ form.addEventListener('submit', (e) => {
 
   //SE L'ID E' PRESENTE NEL SERVER UTILIZZO PUT (MODIFICA) SE NO UTILIZZO POST(AGGIUNGI) E CAMBIO I BOTTONI
 
-  const titleText = document.getElementById('title-text');
-  const formBtn = document.getElementById('form-btn');
 
   let apiMethod;
   let fullUrl;
@@ -82,8 +90,6 @@ form.addEventListener('submit', (e) => {
   if (id) {
     fullUrl = productsURL + '/' + id;
     apiMethod = 'PUT';
-    titleText.innerText = 'Modifica la tua pianta';
-    formBtn.innerText = 'Aggiungi modifica';
   } else {
     fullUrl = productsURL;
     apiMethod = 'POST';
@@ -100,8 +106,15 @@ form.addEventListener('submit', (e) => {
   })
     .then((res) => {
       if (res.ok) {
-        alert('Benvenuta in famiglia nuova pianta!');
+        if(apiMethod === 'POST') {
+        alert('Bentvenuta in famiglia!');
         form.reset();
+        location.assign('./index.html');
+        } else {
+          alert('Pianta modificata!');
+        form.reset();
+        location.assign('./index.html');
+        }
       } else {
         throw new Error(
           `Ops! Qualcosa è andato storto nella risposta: ${res.status}`
