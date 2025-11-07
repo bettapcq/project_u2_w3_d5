@@ -21,7 +21,7 @@ const getProducts = function () {
         return res.json();
       } else {
         throw new Error(
-          alert`Ops! qualcosa è andato storto nella risposta: ${res.status}`
+          alert('Ops! qualcosa è andato storto nella risposta:' + res.status)
         );
       }
     })
@@ -46,7 +46,7 @@ const getProducts = function () {
       });
     })
     .catch((err) => {
-      alert("Ops, c'è un problema con il server:", err);
+      alert("Ops, c'è un problema con il server:" + err);
     });
 };
 

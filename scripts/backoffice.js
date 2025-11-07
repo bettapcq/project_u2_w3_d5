@@ -10,10 +10,9 @@ setYearFooter();
 const productsURL = 'https://striveschool-api.herokuapp.com/api/product';
 
 //SEZIONE PER IDENTIFICARE ID PIANTA
-const url = location.search;
-const allTheParameters = new URLSearchParams(location.search) // new URLSearchParams(url);
+const allTheParameters = new URLSearchParams(location.search); // new URLSearchParams(url);
 const id = allTheParameters.get('_id');
-console.log('ID pianta', id)
+console.log('ID pianta', id);
 
 //SE L'ID E' PRESENTE NEL SERVER TRAMITE GET RIEMPIO IL FORM CON I DETTAGLI DELLA PIANTA
 if (id) {

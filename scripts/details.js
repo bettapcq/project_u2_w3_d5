@@ -7,8 +7,7 @@ const setYearFooter = function () {
 setYearFooter();
 
 // SEZZIONE PER IDENTIFICARE ID DELLA PIANTA
-const url = location.search;
-const allTheParameters = new URLSearchParams(location.search) // new URLSearchParams(url);
+const allTheParameters = new URLSearchParams(location.search); // new URLSearchParams(url);
 const id = allTheParameters.get('_id');
 console.log('ID pianta', id);
 
@@ -30,6 +29,7 @@ const getPlantDetails = () => {
       }
     })
     .then((plantDetails) => {
+      console.log(plantDetails);
       detailsRow.innerHTML += `
             <div class="col col-12 col-md-8 col-lg-6">
                 <div class="card h-100 d-flex flex-column bg-dark">
@@ -49,7 +49,7 @@ const getPlantDetails = () => {
         `;
     })
     .catch((err) => {
-      alert('Ops! Errore dal server:', err);
+      alert('Ops! Errore dal server:' + err);
     });
 };
 
